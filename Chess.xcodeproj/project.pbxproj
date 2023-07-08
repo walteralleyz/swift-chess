@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E2026D62A585D4600228AE5 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2026D52A585D4600228AE5 /* Piece.swift */; };
 		7EB911172A578F0A0033ABE2 /* ChessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911162A578F0A0033ABE2 /* ChessApp.swift */; };
 		7EB911192A578F0A0033ABE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911182A578F0A0033ABE2 /* ContentView.swift */; };
 		7EB9111B2A578F0B0033ABE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9111A2A578F0B0033ABE2 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E2026D52A585D4600228AE5 /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		7EB911132A578F0A0033ABE2 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EB911162A578F0A0033ABE2 /* ChessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessApp.swift; sourceTree = "<group>"; };
 		7EB911182A578F0A0033ABE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				7EB911182A578F0A0033ABE2 /* ContentView.swift */,
 				7EB9111A2A578F0B0033ABE2 /* Assets.xcassets */,
 				7EB9111C2A578F0B0033ABE2 /* Preview Content */,
+				7E2026D52A585D4600228AE5 /* Piece.swift */,
 			);
 			path = Chess;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			files = (
 				7EB911192A578F0A0033ABE2 /* ContentView.swift in Sources */,
 				7EB911172A578F0A0033ABE2 /* ChessApp.swift in Sources */,
+				7E2026D62A585D4600228AE5 /* Piece.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
