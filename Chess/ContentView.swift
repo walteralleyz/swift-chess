@@ -41,23 +41,30 @@ struct ChessboardView: View {
     }
     
     func buildTapAction(row: Int, col: Int) {
-        let temp = table[row][col]
+        var temp = table[row][col]
         
-        if temp.color == turn && self.selected == nil {
+        if temp.color == turn {
+            if self.selected != nil {
+                self.selected!.selected = false
+            }
+            
             selectPiece(temp: temp)
+            
+            return
         }
         
-        if temp.color != self.turn && self.selected != nil {
-            if self.selected!.canWalk(pos: temp.position) {
-                movePieceAtTable(row: row, col: col, temp: temp)
-                resetSelected(temp: temp)
-                invertColor()
-            }
+        let canWalk = self.selected != nil
+        && self.selected!.canWalk(pos: temp.position)
+        
+        if temp.color != self.turn && canWalk {
+            movePieceAtTable(row: row, col: col, temp: temp)
+            resetSelected(temp: &temp)
+            invertColor()
         }
     }
     
     func selectPiece(temp: Piece) {
-        if temp.type != PieceType.EMPTY {
+        if type(of: temp) != Empty.self {
             self.selected = temp
             self.selected!.selected = true
         }
@@ -70,9 +77,13 @@ struct ChessboardView: View {
         table[pos[0]][pos[1]] = temp
     }
     
-    func resetSelected(temp: Piece) {
+    func resetSelected(temp: inout Piece) {
+        let pos = self.selected!.position
+        
         self.selected!.position = temp.position
         self.selected!.selected = false
+        
+        temp.position = pos
         self.selected = nil
     }
     
@@ -101,14 +112,14 @@ struct ContentView_Previews: PreviewProvider {
 
 func generateKingRow(color: PieceColor, row: Int) -> [Piece] {
     return [
-        Piece(type: .ROOK, color: color, position: [row, 0]),
-        Piece(type: .BISHOP, color: color, position: [row, 1]),
-        Piece(type: .KNIGHT, color: color, position: [row, 2]),
-        Piece(type: .KING, color: color, position: [row, 3]),
-        Piece(type: .QUEEN, color: color, position: [row, 4]),
-        Piece(type: .KNIGHT, color: color, position: [row, 5]),
-        Piece(type: .BISHOP, color: color, position: [row, 6]),
-        Piece(type: .ROOK, color: color, position: [row, 7])
+        Rook(color: color, position: [row, 0]),
+        Bishop(color: color, position: [row, 1]),
+        Knight(color: color, position: [row, 2]),
+        King(color: color, position: [row, 3]),
+        Queen(color: color, position: [row, 4]),
+        Knight(color: color, position: [row, 5]),
+        Bishop(color: color, position: [row, 6]),
+        Rook(color: color, position: [row, 7])
     ]
 }
 
@@ -117,7 +128,7 @@ func generatePawnRow(color: PieceColor, row: Int) -> [Piece] {
     
     for col in 0..<8 {
         pieces.append(
-            Piece(type: .PAWN, color: color, position: [row, col]))
+            Pawn(color: color, position: [row, col]))
     }
     
     return pieces
@@ -128,7 +139,7 @@ func generateEmptyPieces(row: Int) -> [Piece] {
     
     for col in 0..<8 {
         pieces.append(
-            Piece(type: .EMPTY, color: .NULL, position: [row, col]))
+            Empty(color: .NULL, position: [row, col]))
     }
     
     return pieces
